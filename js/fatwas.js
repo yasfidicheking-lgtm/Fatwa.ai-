@@ -1,20 +1,18 @@
-const fatwas = [
-  {
-    category: "salat",
-    q: "ما حكم الصلاة بدون وضوء؟",
-    a: "لا تصح الصلاة بدون وضوء.",
-    src: "فتاوى العلماء"
-  },
-  {
-    category: "siyam",
-    q: "هل يجوز الإفطار في رمضان للمريض؟",
-    a: "نعم إذا كان الصوم يضرّه.",
-    src: "فقه الصيام"
-  },
-  {
-    category: "fiqh",
-    q: "ما حكم البيع بالتقسيط؟",
-    a: "جائز بشروط معروفة دون ربا.",
-    src: "فقه المعاملات"
-  }
-];
+fetch("data/fatwas.json")
+  .then(res => res.json())
+  .then(fatwas => {
+    const box = document.getElementById("fatwas");
+    if (!box) return;
+
+    box.innerHTML = "";
+
+    fatwas.forEach(f => {
+      box.innerHTML += `
+        <div class="fatwa">
+          <h4>س: ${f.question}</h4>
+          <p><strong>ج:</strong> ${f.answer}</p>
+          <small>${f.category}</small>
+        </div>
+      `;
+    });
+  });
