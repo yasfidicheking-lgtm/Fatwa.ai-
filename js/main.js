@@ -1,19 +1,13 @@
-function renderFatwas(list) {
-  const container = document.getElementById("fatwaList");
-  container.innerHTML = "";
+function answerQuestion() {
+  const q = document.getElementById("aiQuestion").value;
 
-  if (list.length === 0) {
-    container.innerHTML = "<p>لا توجد فتاوى في هذا القسم</p>";
+  if (!q) {
+    document.getElementById("answer").innerText =
+      "من فضلك اكتب سؤالك أولاً";
     return;
   }
 
-  list.forEach(f => {
-  const div = document.createElement("div");
-  div.className = "fatwa";
-  div.innerHTML = `
-    <strong>السؤال:</strong> ${f.question}<br>
-    <strong>الجواب:</strong> ${f.answer}<br>
-    <em>التصنيف:</em> ${f.category}
-  `;
-  container.appendChild(div);
-});
+  document.getElementById("answer").innerText =
+    "⚠️ هذه إجابة تجريبية. سيتم ربط الذكاء الاصطناعي الحقيقي لاحقاً.\n\nسؤالك: " +
+    q;
+}
