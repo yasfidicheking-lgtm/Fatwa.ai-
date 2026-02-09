@@ -34,21 +34,16 @@
       <button onclick="filterCategory('fiqh')">فقه</button>
     </div>
 
-    <div id="fatwaList"></div>
-  </section>
+    <div id="ai" style="display:none;">
+  <h2>الذكاء الاصطناعي</h2>
 
-  <section id="ai" style="display:none;">
-    <h2>اسأل الذكاء الاصطناعي</h2>
-    <p class="note">⚠️ الإجابات للاسترشاد فقط</p>
+  <input
+    type="text"
+    id="aiQuestion"
+    placeholder="اكتب سؤالك الشرعي هنا..."
+  />
 
-    <textarea id="question" placeholder="اكتب سؤالك هنا..."></textarea>
-    <button onclick="answerQuestion()">إرسال</button>
-    <p id="answer"></p>
-  </section>
+  <button onclick="answerQuestion()">اسأل</button>
 
-  <footer>© 2026 موقع الفتاوى الإسلامية</footer>
-
-  <script src="js/fatwas.js"></script>
-  <script src="js/main.js"></script>
-</body>
-</html>
+  <p id="answer"></p>
+    </div>
