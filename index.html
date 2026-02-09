@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>موقع الفتاوى الإسلامية</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+
   <header>
     <h1>موقع الفتاوى الإسلامية</h1>
     <p>اسأل وتعلّم في ضوء الكتاب والسنة</p>
@@ -17,6 +19,7 @@
     <button onclick="showSection('ai')">الذكاء الاصطناعي</button>
   </nav>
 
+  <!-- ===== قسم الفتاوى ===== -->
   <section id="fatwas">
     <h2>الفتاوى</h2>
 
@@ -28,26 +31,33 @@
     >
 
     <div class="categories">
-      <button onclick="filterCategory('all')">الكل</button>
-      <button onclick="filterCategory('salat')">الصلاة</button>
-      <button onclick="filterCategory('siyam')">الصيام</button>
-      <button onclick="filterCategory('fiqh')">فقه</button>
+      <button onclick="filterCategory('الكل')">الكل</button>
+      <button onclick="filterCategory('الصلاة')">الصلاة</button>
+      <button onclick="filterCategory('الصيام')">الصيام</button>
+      <button onclick="filterCategory('فقه')">فقه</button>
     </div>
 
-    <div id="ai" style="display:none;">
-  <h2>الذكاء الاصطناعي</h2>
+    <!-- هنا كيتحطّو الفتاوى -->
+    <div id="fatwaList"></div>
+  </section>
 
-  <input
-    type="text"
-    id="aiQuestion"
-    placeholder="اكتب سؤالك الشرعي هنا..."
-  />
+  <!-- ===== قسم الذكاء الاصطناعي ===== -->
+  <section id="ai" style="display:none;">
+    <h2>الذكاء الاصطناعي الإسلامي</h2>
 
-  <button onclick="answerQuestion()">اسأل</button>
+    <input
+      type="text"
+      id="aiQuestion"
+      placeholder="اكتب سؤالك في الإسلام..."
+    >
 
-  <p id="answer"></p>
-    </div>
+    <button onclick="answerQuestion()">اسأل</button>
 
-    <script src="js/main.js"></script>
+    <p id="answer"></p>
+  </section>
+
+  <!-- JavaScript (ضروري يكون في الأخير) -->
+  <script src="js/main.js"></script>
+
 </body>
 </html>
