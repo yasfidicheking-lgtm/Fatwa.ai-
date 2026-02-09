@@ -15,7 +15,7 @@ function renderFatwas(list) {
   container.innerHTML = "";
 
   if (list.length === 0) {
-    container.innerHTML = "<p>لا توجد فتاوى مطابقة 🔍</p>";
+    container.innerHTML = "<p>🔍 لا توجد فتاوى مطابقة</p>";
     return;
   }
 
@@ -24,9 +24,13 @@ function renderFatwas(list) {
     div.className = "fatwa";
 
     div.innerHTML = `
-      <strong>السؤال:</strong> ${fatwa.q}<br>
-      <strong>الجواب:</strong> ${fatwa.a}<br>
-      <em>المصدر: ${fatwa.src}</em>
+      <strong>❓ السؤال:</strong><br>
+      ${fatwa.q}<br><br>
+
+      <strong>✅ الجواب:</strong><br>
+      ${fatwa.a}<br><br>
+
+      <em>📚 المصدر: ${fatwa.src}</em>
     `;
 
     container.appendChild(div);
@@ -34,7 +38,7 @@ function renderFatwas(list) {
 }
 
 /* =========================
-   البحث
+   البحث في الفتاوى
 ========================= */
 function searchFatwa() {
   const value = document
@@ -51,7 +55,7 @@ function searchFatwa() {
 }
 
 /* =========================
-   التصنيفات
+   التصفية حسب التصنيف
 ========================= */
 function filterCategory(category) {
   if (category === "all") {
@@ -65,7 +69,7 @@ function filterCategory(category) {
 }
 
 /* =========================
-   الذكاء الاصطناعي (بحث ذكي)
+   الذكاء الاصطناعي (تشابه حقيقي)
 ========================= */
 function answerQuestion() {
   const questionInput = document
@@ -77,35 +81,67 @@ function answerQuestion() {
   const answerBox = document.getElementById("answer");
 
   if (questionInput === "") {
-    answerBox.innerHTML =
-      "❗ من فضلك اكتب سؤالاً أولاً";
+    answerBox.innerHTML = "❗ من فضلك اكتب السؤال أولاً";
     return;
   }
 
-  // البحث في الفتاوى
-  const result = fatwas.find(fatwa =>
-    fatwa.q.toLowerCase().includes(questionInput) ||
-    questionInput.includes(
-      fatwa.q.toLowerCase().split(" ")[0]
-    )
-  );
+  // كلمات عامة ما مهمّاش
+  const stopWords = [
+    "ما", "ماهو", "ماهي", "هل", "حكم", "كيف", "لماذا",
+    "في", "على", "عن", "من", "إلى", "هذا", "هذه"
+  ];
 
-  if (result) {
+  // كلمات المستخدم المهمة
+  const userWords = questionInput
+    .split(" ")
+    .filter(word =>
+      word.length > 2 && !stopWords.includes(word)
+    );
+
+  let bestMatch = null;
+  let bestRatio = 0;
+
+  fatwas.forEach(fatwa => {
+    const fatwaWords = fatwa.q
+      .toLowerCase()
+      .split(" ")
+      .filter(word =>
+        word.length > 2 && !stopWords.includes(word)
+      );
+
+    let matchCount = 0;
+
+    userWords.forEach(word => {
+      if (fatwaWords.includes(word)) {
+        matchCount++;
+      }
+    });
+
+    const ratio = matchCount / userWords.length;
+
+    if (ratio > bestRatio) {
+      bestRatio = ratio;
+      bestMatch = fatwa;
+    }
+  });
+
+  // شرط التشابه الحقيقي (60%)
+  if (bestMatch && bestRatio >= 0.6) {
     answerBox.innerHTML = `
       <div class="fatwa">
-        <strong>📌 السؤال:</strong><br>
-        ${result.q}<br><br>
+        <strong>❓ السؤال:</strong><br>
+        ${bestMatch.q}<br><br>
 
         <strong>✅ الجواب:</strong><br>
-        ${result.a}<br><br>
+        ${bestMatch.a}<br><br>
 
-        <em>📚 المصدر: ${result.src}</em>
+        <em>📚 المصدر: ${bestMatch.src}</em>
       </div>
     `;
   } else {
     answerBox.innerHTML = `
-      🤖 لم أجد فتوى مطابقة لهذا السؤال.<br>
-      حاول صياغة السؤال بطريقة أخرى أو ابحث في قسم الفتاوى.
+      ❌ لم يتم العثور على فتوى مطابقة لهذا السؤال.<br>
+      حاول إعادة صياغة السؤال.
     `;
   }
 }
