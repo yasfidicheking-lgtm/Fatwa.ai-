@@ -2,61 +2,83 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>موقع الفتاوى الإسلامية</title>
+  <title>📖 موقع الفتاوى الإسلامية</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <!-- =========================
+       HEADER
+  ========================= -->
   <header>
-    <h1>موقع الفتاوى الإسلامية</h1>
-    <p>اسأل وتعلّم في ضوء الكتاب والسنة</p>
+    <h1>📖 موقع الفتاوى الإسلامية</h1>
+    <p>للاستئناس فقط – الفتوى من أهل العلم</p>
   </header>
 
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
   <nav>
     <button onclick="showSection('fatwas')">الفتاوى</button>
     <button onclick="showSection('ai')">الذكاء الاصطناعي</button>
   </nav>
 
-  <!-- ===== قسم الفتاوى ===== -->
+  <!-- =========================
+       FATWAS SECTION
+  ========================= -->
   <section id="fatwas">
-    <h2>الفتاوى</h2>
+    <h2>🔍 البحث في الفتاوى</h2>
 
     <input
       type="text"
       id="searchInput"
-      placeholder="ابحث عن فتوى..."
+      placeholder="قلب على فتوى..."
       onkeyup="searchFatwa()"
     >
 
     <div class="categories">
-      <button onclick="filterCategory('الكل')">الكل</button>
-      <button onclick="filterCategory('الصلاة')">الصلاة</button>
-      <button onclick="filterCategory('الصيام')">الصيام</button>
-      <button onclick="filterCategory('فقه')">فقه</button>
+      <button onclick="filterCategory('all')">الكل</button>
+      <button onclick="filterCategory('salat')">الصلاة</button>
+      <button onclick="filterCategory('siyam')">الصيام</button>
+      <button onclick="filterCategory('fiqh')">فقه عام</button>
     </div>
 
-    <!-- هنا كيتحطّو الفتاوى -->
     <div id="fatwaList"></div>
   </section>
 
-  <!-- ===== قسم الذكاء الاصطناعي ===== -->
+  <!-- =========================
+       AI SECTION
+  ========================= -->
   <section id="ai" style="display:none;">
-    <h2>الذكاء الاصطناعي الإسلامي</h2>
+    <h2>🤖 اسأل الذكاء الاصطناعي</h2>
 
-    <input
-      type="text"
-      id="aiQuestion"
-      placeholder="اكتب سؤالك في الإسلام..."
-    >
+    <p class="note">
+      ⚠️ تنبيه: الجواب آلي وللاستئناس فقط، لا يُغني عن الرجوع لأهل العلم
+    </p>
 
-    <button onclick="answerQuestion()">اسأل</button>
+    <textarea
+      id="question"
+      placeholder="اكتب سؤالك هنا..."
+    ></textarea>
 
-    <p id="answer"></p>
+    <button onclick="answerQuestion()">إرسال</button>
+
+    <div id="answer"></div>
   </section>
 
-  <!-- JavaScript (ضروري يكون في الأخير) -->
+  <!-- =========================
+       FOOTER
+  ========================= -->
+  <footer>
+    © 2026 – موقع الفتاوى الإسلامية
+  </footer>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+  <script src="js/fatwas.js"></script>
   <script src="js/main.js"></script>
 
 </body>
