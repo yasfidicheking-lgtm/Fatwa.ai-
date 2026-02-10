@@ -4,11 +4,15 @@
 function showSection(id) {
   document.getElementById("fatwas").style.display = "none";
   document.getElementById("ai").style.display = "none";
+
+  const sunnaSection = document.getElementById("sunna");
+  if (sunnaSection) sunnaSection.style.display = "none";
+
   document.getElementById(id).style.display = "block";
 }
 
 /* =========================
-   MENU ☰ (إضافة فقط)
+   MENU ☰
 ========================= */
 function toggleMenu() {
   const menu = document.getElementById("sideMenu");
@@ -96,7 +100,44 @@ function filterCategory(category) {
 }
 
 /* =========================
-   الذكاء الاصطناعي (تشابه حقيقي)
+   عرض السنة
+========================= */
+function renderSunna() {
+  const container = document.getElementById("sunnaList");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  sunnaQuestions.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "fatwa";
+
+    div.innerHTML = `
+      <strong>❓ السؤال:</strong><br>
+      ${item.q}<br><br>
+
+      <strong>📜 الجواب:</strong><br>
+      ${item.a}<br><br>
+
+      <em>📚 المصدر: ${item.src}</em>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+function showSunna() {
+  document.getElementById("fatwas").style.display = "none";
+  document.getElementById("ai").style.display = "none";
+
+  const sunnaSection = document.getElementById("sunna");
+  sunnaSection.style.display = "block";
+
+  renderSunna();
+}
+
+/* =========================
+   الذكاء الاصطناعي
 ========================= */
 function answerQuestion() {
   const questionInput = document
@@ -112,42 +153,6 @@ function answerQuestion() {
     return;
   }
 
-  const stopWords = [
-    "ما", "ماهو", "ماهي", "هل", "حكم", "كيف", "لماذا",
-    "في", "على", "عن", "من", "إلى", "هذا", "هذه"
-  ];
-
-  const userWords = questionInput
-    .split(" ")
-    .filter(word =>
-      word.length > 2 && !stopWords.includes(word)
-    );
-
-  let bestMatch = null;
-  let bestRatio = 0;
-
-  fatwas.forEach(fatwa => {
-    const fatwaWords = fatwa.q
-      .toLowerCase()
-      .split(" ")
-      .filter(word =>
-        word.length > 2 && !stopWords.includes(word)
-      );
-
-    let matchCount = 0;
-
-    userWords.forEach(word => {
-      if (fatwaWords.includes(word)) {
-        matchCount++;
-      }
-    });
-
-    const ratio = matchCount / userWords.length;
-
-    if (ratio > bestRatio) {
-      bestRatio = ratio;
-      bestMatch = fatwa;
-    }
-  });
-
-  if (bestMatch && bestRatio >= 0.6)
+  answerBox.innerHTML =
+    "🤖 هذا جواب تقريبي، يُرجى الرجوع لأهل العلم في الفتوى.";
+}
