@@ -9,6 +9,7 @@ header, footer {
   color: white;
   text-align: center;
   padding: 15px;
+  position: relative;
 }
 
 nav {
@@ -48,4 +49,47 @@ input, textarea {
 .note {
   color: #b00000;
   font-weight: bold;
+}
+
+/* =========================
+   زر 3 الشرطات ☰
+========================= */
+.menu-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  user-select: none;
+}
+
+/* =========================
+   المينيو الجانبية
+========================= */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 250px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.25);
+  padding-top: 80px;
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #1e6f5c;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+.side-menu a:hover {
+  background: #f4f6f3;
 }
