@@ -1,89 +1,81 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <title>الفتاوى | السنة | التعريفات</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+  <meta charset="UTF-8">  
+  <title>📖 موقع الفتاوى الإسلامية</title>    <!-- CSS -->    <link rel="stylesheet" href="css/style.css">  
+</head>  
+<body>    <!-- =========================  
+       HEADER  
+  ========================= -->    <header>  
+    <!-- زر 3 الشرطات -->  
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>  <h1>📖 موقع الفتاوى الإسلامية</h1>  
+<p>إفقه في دينك – الفتوى من أهل العلم</p>
 
-<!-- زر المينيو -->
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </header>    <!-- =========================  
+       SIDE MENU  
+  ========================= -->    <div id="sideMenu" class="side-menu">  
+    <a onclick="showSection('fatwas'); toggleMenu()">📜 الفتاوى</a>  
+    <a onclick="showSection('ai'); toggleMenu()">🤖 الذكاء الاصطناعي</a>  
+    <hr>  
+    <a onclick="showSunna(); toggleMenu()">📖 السنة</a>  
+    <a href="#">📚 تعريفات</a>  
+  </div>    <!-- =========================  
+       NAVIGATION  
+  ========================= -->    <nav>  
+    <button onclick="showSection('fatwas')">الفتاوى</button>  
+    <button onclick="showSection('ai')">الذكاء الاصطناعي</button>  
+    <button onclick="showSunna()">السنة</button>  
+  </nav>    <!-- =========================  
+       FATWAS SECTION  
+  ========================= -->    <section id="fatwas">  
+    <h2>🔍 البحث في الفتاوى</h2>  <input  
+  type="text"  
+  id="searchInput"  
+  placeholder="قلب على فتوى..."  
+  onkeyup="searchFatwa()"  
+>  
 
-<!-- المينيو الجانبي -->
-<div id="sideMenu" class="side-menu">
-  <ul>
-    <li onclick="showSection('fatwas')">📚 الفتاوى</li>
-    <li onclick="showSunna()">📜 السنة</li>
-    <li onclick="showDefinitions()">📘 التعريفات</li>
-    <li onclick="showSection('ai')">🤖 المجيب الآلي</li>
-  </ul>
-</div>
+<div class="categories">  
+  <button onclick="filterCategory('all')">الكل</button>  
+  <button onclick="filterCategory('salat')">الصلاة</button>  
+  <button onclick="filterCategory('siyam')">الصيام</button>  
+  <button onclick="filterCategory('fiqh')">فقه عام</button>  
+</div>  
 
-<!-- =========================
-     قسم الفتاوى
-========================= -->
-<section id="fatwas">
-  <h2>📚 الفتاوى</h2>
+<div id="fatwaList"></div>
 
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="🔍 ابحث في الفتاوى"
-    onkeyup="searchFatwa()"
-  >
+  </section>    <!-- =========================  
+       SUNNA SECTION  
+  ========================= -->    <section id="sunna" style="display:none;">  
+    <h2>📖 أسئلة وأجوبة في السنة النبوية</h2>  <div id="sunnaList"></div>
 
-  <div class="categories">
-    <button onclick="filterCategory('all')">الكل</button>
-    <button onclick="filterCategory('salat')">الصلاة</button>
-    <button onclick="filterCategory('siyam')">الصيام</button>
-    <button onclick="filterCategory('zakat')">الزكاة</button>
-  </div>
+  </section>    <!-- =========================  
+       AI SECTION  
+  ========================= -->    <section id="ai" style="display:none;">  
+    <h2>🤖 اسأل الذكاء الاصطناعي</h2>  <p class="note">  
+  ⚠️ تنبيه: الجواب   
+ لا يُغني عن الرجوع لأهل العلم  
+</p>  
 
-  <div id="fatwaList"></div>
-</section>
+<textarea  
+  id="question"  
+  placeholder="اكتب سؤالك هنا..."  
+></textarea>  
 
-<!-- =========================
-     قسم السنة
-========================= -->
-<section id="sunna" style="display:none;">
-  <h2>📜 السنة النبوية</h2>
+<button onclick="answerQuestion()">إرسال</button>  
 
-  <div id="sunnaList"></div>
-</section>
+<div id="answer"></div>
 
-<!-- =========================
-     قسم التعريفات
-     (بحال السنة – بلا بحث)
-========================= -->
-<section id="definitions" style="display:none;">
-  <h2>📘 التعريفات</h2>
-
-  <div id="definitionList"></div>
-</section>
-
-<!-- =========================
-     قسم المجيب الآلي
-========================= -->
-<section id="ai" style="display:none;">
-  <h2>🤖 المجيب الآلي</h2>
-
-  <input
-    type="text"
-    id="question"
-    placeholder="❓ اكتب سؤالك هنا"
-  >
-
-  <button onclick="answerQuestion()">إرسال</button>
-
-  <div id="answer"></div>
-</section>
-
-<!-- ملفات الجافاسكريبت -->
-<script src="fatwas.js"></script>
-<script src="sunna.js"></script>
-<script src="definitions.js"></script>
-<script src="main.js"></script>
-
-</body>
+  </section>    <!-- =========================  
+       FOOTER  
+  ========================= -->    <footer>  
+    © 2026 –موقع الفتاوى الإسلامية   
+  </footer>    <!-- =========================  
+       JAVASCRIPT  
+  ========================= -->    <script src="js/fatwas.js"></script>    <script src="js/sunna.js"></script>    <script src="js/main.js"></script>    <!-- MENU SCRIPT -->    <script>  
+    function toggleMenu() {  
+      const menu = document.getElementById("sideMenu");  
+      menu.style.right =  
+        menu.style.right === "0px" ? "-260px" : "0px";  
+    }  
+  </script>  </body>  
 </html>
