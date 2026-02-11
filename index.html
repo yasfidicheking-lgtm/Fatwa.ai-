@@ -13,7 +13,6 @@
        HEADER
   ========================= -->
   <header>
-    <!-- زر 3 الشرطات -->
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
     <h1>📖 موقع الفتاوى الإسلامية</h1>
@@ -25,10 +24,10 @@
   ========================= -->
   <div id="sideMenu" class="side-menu">
     <a onclick="showSection('fatwas'); toggleMenu()">📜 الفتاوى</a>
-    <a onclick="showSection('ai'); toggleMenu()">🤖 الذكاء الاصطناعي</a>
-    <hr>
     <a onclick="showSunna(); toggleMenu()">📖 السنة</a>
-    <a href="#">📚 تعريفات</a>
+    <a onclick="showDefinitions(); toggleMenu()">📚 تعريفات</a>
+    <hr>
+    <a onclick="showSection('ai'); toggleMenu()">🤖 الذكاء الاصطناعي</a>
   </div>
 
   <!-- =========================
@@ -36,8 +35,9 @@
   ========================= -->
   <nav>
     <button onclick="showSection('fatwas')">الفتاوى</button>
-    <button onclick="showSection('ai')">الذكاء الاصطناعي</button>
     <button onclick="showSunna()">السنة</button>
+    <button onclick="showDefinitions()">تعريفات</button>
+    <button onclick="showSection('ai')">الذكاء الاصطناعي</button>
   </nav>
 
   <!-- =========================
@@ -68,8 +68,23 @@
   ========================= -->
   <section id="sunna" style="display:none;">
     <h2>📖 أسئلة وأجوبة في السنة النبوية</h2>
-
     <div id="sunnaList"></div>
+  </section>
+
+  <!-- =========================
+       DEFINITIONS SECTION
+  ========================= -->
+  <section id="definitions" style="display:none;">
+    <h2>📚 تعريفات شرعية</h2>
+
+    <input
+      type="text"
+      id="definitionSearch"
+      placeholder="ابحث عن تعريف..."
+      onkeyup="searchDefinition()"
+    >
+
+    <div id="definitionList"></div>
   </section>
 
   <!-- =========================
@@ -79,8 +94,7 @@
     <h2>🤖 اسأل الذكاء الاصطناعي</h2>
 
     <p class="note">
-      ⚠️ تنبيه: الجواب 
-     لا يُغني عن الرجوع لأهل العلم
+      ⚠️ تنبيه: الجواب لا يُغني عن الرجوع لأهل العلم
     </p>
 
     <textarea
@@ -97,7 +111,7 @@
        FOOTER
   ========================= -->
   <footer>
-    © 2026 –موقع الفتاوى الإسلامية 
+    © 2026 – موقع الفتاوى الإسلامية
   </footer>
 
   <!-- =========================
@@ -105,6 +119,7 @@
   ========================= -->
   <script src="js/fatwas.js"></script>
   <script src="js/sunna.js"></script>
+  <script src="js/definitions.js"></script>
   <script src="js/main.js"></script>
 
   <!-- MENU SCRIPT -->
