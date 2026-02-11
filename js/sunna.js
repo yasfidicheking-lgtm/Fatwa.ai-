@@ -1,4 +1,4 @@
-const sunna.sj = [
+const sunna = [
   {
     id: 1,
     q: "ما المقصود بالسنة النبوية؟",
